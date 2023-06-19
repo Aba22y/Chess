@@ -1,12 +1,12 @@
 package pieces;
 
-import main.GamePanel;
-import main.MouseHandler;
-
 public class Pawn extends Piece{
 
-    public Pawn(GamePanel gp, MouseHandler mouse, int row, int column) {
-        super(gp, mouse, row, column);
+    public Pawn(boolean black) {
+        if (black) {
+            this.image = imageUtil.getImage("black", "bpawn");
+        } else {
+            this.image = imageUtil.getImage("white", "wpawn");
+        }
     }
-    
 }

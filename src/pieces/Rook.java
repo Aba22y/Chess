@@ -1,13 +1,14 @@
 package pieces;
 
-import main.GamePanel;
-import main.MouseHandler;
-
 public class Rook extends Piece{
 
-    public Rook(GamePanel gp, MouseHandler mouse, int row, int column) {
-        super(gp, mouse, row, column);
-        //TODO Auto-generated constructor stub
+    public Rook(boolean black) {
+        if (black) {
+            this.image = imageUtil.getImage("black", "brook");
+        } else {
+            this.image = imageUtil.getImage("white", "wrook");
+        }
     }
+
     
 }

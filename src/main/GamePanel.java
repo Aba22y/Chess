@@ -3,8 +3,13 @@ package main;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import pieces.Bishop;
+import pieces.King;
+import pieces.Knight;
 import pieces.Pawn;
-import pieces.Piece;
+import pieces.Position;
+import pieces.Queen;
+import pieces.Rook;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,23 +21,23 @@ import java.io.IOException;
 public class GamePanel extends JPanel implements Runnable{
     //SCREEN SETTINGS
     final int originalTile = 16; //16x16 tile
-    final int scale = 3; //account for modern screens
+    final int scale = 4; //account for modern screens
 
-    public final int tileSize = originalTile * scale; //48x48 tile
+    public final int tileSize = originalTile * scale; //64x64 tile
     final int maxScreenCol = 8;
     final int maxScreenRow = 8;
 
     //A chessboard is 8x8 cells large
-    final int screenWidth = tileSize * maxScreenCol; //392 pixels wide
-    final int screenLength = tileSize * maxScreenRow;//392 pixels long
+    final int screenWidth = tileSize * maxScreenCol; //512 pixels wide
+    final int screenLength = tileSize * maxScreenRow;//512 pixels long
 
     //FPS
     int FPS = 10;
 
     MouseHandler mouseH = new MouseHandler();
     Thread gameThread;
-    Piece[][] board = new Piece[8][8];
-    public Piece selected = null;
+    Position[][] board = new Position[8][8];
+    public Position selected = null;
 
 
     public GamePanel() {
@@ -41,12 +46,22 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.addMouseListener(mouseH);
         for (int i = 0; i < 8; i++) {
-            board[1][i] = new Pawn(this, this.mouseH, i, 1);
-            board[6][i] = new Pawn(this, this.mouseH, i, 6);
-            board[2][i] = null;
-            board[3][i] = null;
-            board[4][i] = null;
-            board[5][i] = null;
+            if (i==0 || i==7) {
+                board[i][0] = new Position(i, 0, false, new Rook(i==0?true:false), this, mouseH);
+                board[i][7] = new Position(i, 7, false, new Rook(i==0?true:false), this, mouseH);
+                board[i][1] = new Position(i, 1, false, new Knight(i==0?true:false), this, mouseH);
+                board[i][6] = new Position(i, 6, false, new Knight(i==0?true:false), this, mouseH);
+                board[i][2] = new Position(i, 2, false, new Bishop(i==0?true:false), this, mouseH);
+                board[i][5] = new Position(i, 5, false, new Bishop(i==0?true:false), this, mouseH);
+                board[i][3] = new Position(i, 3, false, new Queen(i==0?true:false), this, mouseH);
+                board[i][4] = new Position(i, 4, false, new King(i==0?true:false), this, mouseH);
+            }
+            board[1][i] = new Position(1, i, false, new Pawn(true), this, mouseH);
+            board[6][i] = new Position(6, i, false, new Pawn(false), this, mouseH);
+            board[2][i] = new Position(2, i, false, null, this, mouseH);
+            board[3][i] = new Position(3, i, false, null, this, mouseH);
+            board[4][i] = new Position(4, i, false, null, this, mouseH);
+            board[5][i] = new Position(5, i, false, null, this, mouseH);
         }
     }
 

@@ -1,12 +1,13 @@
 package pieces;
 
-import main.GamePanel;
-import main.MouseHandler;
-
 public class Queen extends Piece{
 
-    public Queen(GamePanel gp, MouseHandler mouse, int row, int column) {
-        super(gp, mouse, row, column);
-        //TODO Auto-generated constructor stub
-    }  
+    public Queen(boolean black) {
+        if (black) {
+            this.image = imageUtil.getImage("black", "bqueen");
+        } else {
+            this.image = imageUtil.getImage("white", "wqueen");
+        }
+    }
+
 }

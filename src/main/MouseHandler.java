@@ -10,20 +10,17 @@ public class MouseHandler implements MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        this.mousePressed = mousePressed==false?true:false;
+        this.x = e.getX()/64;
+        this.y = e.getY()/64;
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        this.mousePressed = true;
-        this.x = e.getX()/48;
-        this.y = e.getY()/48;
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        this.mousePressed = false;
-        this.x = 0;
-        this.y = 0;
     }
 
     @Override
