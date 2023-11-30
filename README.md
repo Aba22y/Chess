@@ -1,3 +1,3 @@
 # Chess
-Chess application programmed using java.
-STATUS: Unfinished 
+# Chess application programmed using java.
+# STATUS: Unfinished 
